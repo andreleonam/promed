@@ -1,0 +1,58 @@
+@startuml
+
+enum StatusExame {
+  SOLICITADO
+  RECEBIDO
+}
+
+enum Turno {
+  MANHA
+  TARDE
+  NOITE
+}
+
+enum Encaminhamento {
+  ESPECIALISTA
+  INTERNACAO
+  SERVICO_EMERGENCIA
+}
+
+enum TipoConsulta {
+  PRIMEIRA_VEZ
+  RETORNO
+}
+
+enum EstadoCivil {
+  CASADO
+  DIVORCIADO
+  UNIAO_ESTAVEL
+  VIUVO
+  SOLTEIRO
+}
+
+enum StatusCadastro {
+  INCOMPLETO
+  COMPLETO
+}
+
+enum StatusConsulta {
+  AGENDADA
+  CONFIRMADA
+  REALIZADA
+  CANCELADA
+}
+
+enum TipoPrioridade {
+  NENHUMA
+  IDOSO
+  GESTANTE
+  DEFICIENCIA
+}
+
+enum StatusPendencia {
+  PENDENTE
+  APROVADO
+  REJEITADO
+}
+
+@enduml

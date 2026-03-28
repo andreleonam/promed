@@ -1,0 +1,9 @@
+@startuml ModeloSuporte
+
+enum StatusPendencia {
+  PENDENTE
+  APROVADO
+  REJEITADO
+}
+
+@enduml

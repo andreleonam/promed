@@ -1,0 +1,61 @@
+@startuml
+
+abstract class Prescricao {
+  codigo : int
+  dataPrescricao : DateTime
+  observacoes : Text
+}
+
+class PrescricaoMedicamento {
+}
+
+class PrescricaoManipulada {
+}
+
+class ItemPrescricaoMedicamento {
+  nomeMedicamento : String
+  posologia : Text
+  viaAdministracao : String
+  observacoes : Text
+}
+
+class ItemPrescricaoManipulado {
+  descricao : Text
+  posologia : Text
+  viaAdministracao : String
+  observacoes : Text
+}
+
+class Medicamento {
+  codigo : int
+  nome : String
+}
+
+class ComponenteFormula {
+  nomeSubstancia : String
+  quantidade : String
+}
+
+class Substancia {
+  codigo : int
+  nome : String
+}
+
+class Consulta {
+  codigo : int
+}
+
+Prescricao <|-- PrescricaoMedicamento
+Prescricao <|-- PrescricaoManipulada
+
+Consulta "1" *-- "0..*" Prescricao : prescricoes
+
+PrescricaoMedicamento "1" *-- "1..*" ItemPrescricaoMedicamento : itens
+PrescricaoManipulada "1" *-- "1..*" ItemPrescricaoManipulado : itens
+
+ItemPrescricaoMedicamento "*" -- "0..1" Medicamento : medicamento
+
+ItemPrescricaoManipulado "1" *-- "1..*" ComponenteFormula : componentes
+ComponenteFormula "*" -- "0..1" Substancia : substancia
+
+@enduml

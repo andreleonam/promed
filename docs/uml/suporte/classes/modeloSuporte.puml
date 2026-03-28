@@ -1,0 +1,24 @@
+@startuml ModeloSuporte
+
+class MedicamentoPendente {
+  codigo : int
+  nomeInformado : String
+  dataRegistro : DateTime
+  status : StatusPendencia
+}
+
+class SubstanciaPendente {
+  codigo : int
+  nomeInformado : String
+  dataRegistro : DateTime
+  status : StatusPendencia
+}
+
+class ExamePendente {
+  codigo : int
+  nomeInformado : String
+  dataRegistro : DateTime
+  status : StatusPendencia
+}
+
+@enduml

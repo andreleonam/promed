@@ -1,0 +1,43 @@
+@startuml
+left to right direction
+
+actor Recepcionista
+actor Medico
+actor Paciente
+
+rectangle "Sistema de Clínica Médica - proMed" {
+
+  ' --- AGENDAMENTO ---
+  usecase "Agendar Consulta" as A
+  usecase "Remarcar Consulta" as B
+  usecase "Cancelar Consulta" as C
+
+  ' --- ATENDIMENTO ---
+  usecase "Confirmar Chegada" as D
+  usecase "Realizar Consulta" as E
+
+  ' --- AÇÕES CLÍNICAS ---
+  usecase "Prescrever Medicamento" as F
+  usecase "Solicitar Exame" as G
+  usecase "Encaminhar Paciente" as H
+  usecase "Registrar Resultados de Exames" as I
+
+  Recepcionista --> A
+  Recepcionista --> B
+  Recepcionista --> C
+  Recepcionista --> D
+
+  Paciente --> A
+  Paciente --> B
+  Paciente --> C
+  Paciente --> E
+
+  Medico --> E
+
+  E --> F : <<extend>>
+  E --> G : <<extend>>
+  E --> H : <<extend>>
+  E --> I : <<extend>>
+}
+
+@enduml

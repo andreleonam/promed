@@ -1,0 +1,35 @@
+@startuml
+
+class Consulta {
+  codigo : int
+}
+
+class EncaminhamentoConsulta {
+  tipo : Encaminhamento
+  destino : String
+  observacao : Text
+}
+
+abstract class Atestado {
+  codigo : int
+  dataEmissao : DateTime
+  observacoes : Text
+}
+
+class AtestadoComparecimento {
+  horaEntrada : DateTime
+  horaSaida : DateTime
+}
+
+class AtestadoAfastamento {
+  diasAfastamento : int
+  dataInicio : Date
+}
+
+Atestado <|-- AtestadoComparecimento
+Atestado <|-- AtestadoAfastamento
+
+Consulta "1" *-- "0..1" EncaminhamentoConsulta : encaminhamento
+Consulta "1" *-- "0..*" Atestado : atestados
+
+@enduml

@@ -1,0 +1,62 @@
+@startuml
+
+class Consulta {
+  codigo : int
+  dataHora : DateTime
+  status : StatusConsulta
+  tipo : TipoConsulta
+  horaChegada : DateTime
+  prioridade : boolean
+}
+
+class Paciente {
+  profissao : String
+}
+
+class Medico {
+  crm : String
+  especialidade : String
+}
+
+abstract class Papel {
+}
+
+class Anamnese {
+  queixaPrincipal : Text
+  historiaDoencaAtual : Text
+  anamneseDirigida : Text
+  historiaPatologicaPregressa : Text
+  historiaFisiologica : Text
+  historiaSocial : Text
+  historiaFamiliar : Text
+  antecedentes : Text
+  outros : Text
+}
+
+class ExameFisico {
+  sinaisVitais : Text
+  cabecaPescoco : Text
+  aparelhoRespiratorio : Text
+  aparelhoCardiovascular : Text
+  abdome : Text
+  membros : Text
+  neurologico : Text
+  outros : Text
+}
+
+class ExameApresentado {
+  descricao : String
+  dataExame : Date
+  resultado : Text
+  observacaoMedico : Text
+}
+
+Consulta "*" -- "1" Paciente : paciente
+Consulta "*" -- "1" Medico : medico
+Consulta "*" -- "1" Papel : criadoPor
+
+Consulta "1" *-- "0..1" Anamnese : anamnese
+Consulta "1" *-- "0..1" ExameFisico : exameFisico
+Consulta "1" *-- "0..*" ExameApresentado : examesApresentados
+
+@enduml

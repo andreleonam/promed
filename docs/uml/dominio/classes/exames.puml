@@ -1,0 +1,30 @@
+@startuml
+
+class Consulta {
+  codigo : int
+}
+
+class SolicitacaoExame {
+  codigo : int
+  motivo : Text
+  observacoes : Text
+  status : StatusExame
+}
+
+class ItemSolicitacaoExame {
+  nomeExame : String
+  resultado : Text
+}
+
+class Exame {
+  codigo : int
+  nome : String
+}
+
+Consulta "1" *-- "0..*" SolicitacaoExame : solicitacoes
+
+SolicitacaoExame "1" *-- "1..*" ItemSolicitacaoExame : itens
+
+ItemSolicitacaoExame "*" -- "0..1" Exame : exame
+
+@enduml

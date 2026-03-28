@@ -1,0 +1,247 @@
+@startuml
+
+title Modelo de Domínio - Visão Consolidada
+
+' Este diagrama representa uma visão consolidada do domínio
+' Integra os principais contextos do sistema
+
+
+' ================= ENTIDADES BÁSICAS =================
+
+class Estado {
+  codigo : int
+  nome : String
+  sigla : String
+}
+
+class Cidade {
+  codigo : int
+  nome : String
+}
+
+class Endereco {
+  logradouro : String
+  numero : String
+  complemento : String
+  bairro : String
+  cep : String
+}
+
+class TipoDocumento {
+  codigo : int
+  nome : String
+}
+
+class Documento {
+  numero : String
+}
+
+class Pessoa {
+  codigo : int
+  nome : String
+  dataNascimento : Date
+  estadoCivil : EstadoCivil
+  escolaridade : String
+  statusCadastro : StatusCadastro
+  tipoPrioridade : TipoPrioridade
+}
+
+' ================= PAPÉIS =================
+
+abstract class Papel {
+}
+
+class Paciente {
+  profissao : String
+}
+
+class Funcionario {
+  cargo : String
+  dataAdmissao : Date
+  dataDesligamento : Date
+}
+
+class Medico {
+  crm : String
+  especialidade : String
+}
+
+' ================= CONSULTA =================
+
+class Consulta {
+  codigo : int
+  dataHora : DateTime
+  status : StatusConsulta
+  tipo : TipoConsulta
+  horaChegada : DateTime
+  prioridade : boolean
+}
+
+' ================= ANAMNESE E EXAME =================
+
+class Anamnese {
+  queixaPrincipal : Text
+  historiaDoencaAtual : Text
+  anamneseDirigida : Text
+  historiaPatologicaPregressa : Text
+  historiaFisiologica : Text
+  historiaSocial : Text
+  historiaFamiliar : Text
+  antecedentes : Text
+  outros : Text
+}
+
+class ExameFisico {
+  sinaisVitais : Text
+  cabecaPescoco : Text
+  aparelhoRespiratorio : Text
+  aparelhoCardiovascular : Text
+  abdome : Text
+  membros : Text
+  neurologico : Text
+  outros : Text
+}
+
+class ExameApresentado {
+  descricao : String
+  dataExame : Date
+  resultado : Text
+  observacaoMedico : Text
+}
+
+' ================= PRESCRIÇÃO =================
+
+abstract class Prescricao {
+  codigo : int
+  dataPrescricao : DateTime
+  observacoes : Text
+}
+
+class PrescricaoMedicamento {
+}
+
+class PrescricaoManipulada {
+}
+
+class ItemPrescricaoMedicamento {
+  nomeMedicamento : String
+  posologia : Text
+  viaAdministracao : String
+  observacoes : Text
+}
+
+class ItemPrescricaoManipulado {
+  descricao : Text
+  posologia : Text
+  viaAdministracao : String
+  observacoes : Text
+}
+
+class Medicamento {
+  codigo : int
+  nome : String
+}
+
+class ComponenteFormula {
+  nomeSubstancia : String
+  quantidade : String
+}
+
+class Substancia {
+  codigo : int
+  nome : String
+}
+
+' ================= ENCAMINHAMENTO =================
+
+class EncaminhamentoConsulta {
+  tipo : Encaminhamento
+  destino : String
+  observacao : Text
+}
+
+' ================= EXAMES =================
+
+class SolicitacaoExame {
+  codigo : int
+  motivo : Text
+  observacoes : Text
+  status : StatusExame
+}
+
+class ItemSolicitacaoExame {
+  nomeExame : String
+  resultado : Text
+}
+
+class Exame {
+  codigo : int
+  nome : String
+}
+
+' ================= ATESTADOS =================
+
+abstract class Atestado {
+  codigo : int
+  dataEmissao : DateTime
+  observacoes : Text
+}
+
+class AtestadoComparecimento {
+  horaEntrada : DateTime
+  horaSaida : DateTime
+}
+
+class AtestadoAfastamento {
+  diasAfastamento : int
+  dataInicio : Date
+}
+
+' ================= RELAÇÕES =================
+
+Pessoa "1" -- "0..*" Papel : papeis
+
+Papel <|-- Paciente
+Papel <|-- Funcionario
+Funcionario <|-- Medico
+
+Pessoa "1" *-- "0..1" Endereco : endereco
+Endereco "*" -- "1" Cidade : cidade
+
+Pessoa "1" *-- "0..*" Documento : documentos
+Documento "*" -- "1" TipoDocumento : tipoDocumento
+
+Estado "1" *-- "1..*" Cidade : cidades
+
+Consulta "*" -- "1" Paciente : paciente
+Consulta "*" -- "1" Medico : medico
+Consulta "*" -- "1" Papel : criadoPor
+
+Consulta "1" *-- "0..1" Anamnese : anamnese
+Consulta "1" *-- "0..1" ExameFisico : exameFisico
+Consulta "1" *-- "0..*" ExameApresentado : examesApresentados
+
+Prescricao <|-- PrescricaoMedicamento
+Prescricao <|-- PrescricaoManipulada
+
+Consulta "1" *-- "0..*" Prescricao : prescricoes
+
+PrescricaoMedicamento "1" *-- "1..*" ItemPrescricaoMedicamento : itens
+PrescricaoManipulada "1" *-- "1..*" ItemPrescricaoManipulado : itens
+
+ItemPrescricaoMedicamento "*" -- "0..1" Medicamento : medicamento
+ItemPrescricaoManipulado "1" *-- "1..*" ComponenteFormula : componentes
+ComponenteFormula "*" -- "0..1" Substancia : substancia
+
+Consulta "1" *-- "0..1" EncaminhamentoConsulta : encaminhamento
+
+Consulta "1" *-- "0..*" SolicitacaoExame : solicitacoes
+SolicitacaoExame "1" *-- "1..*" ItemSolicitacaoExame : itens
+ItemSolicitacaoExame "*" -- "0..1" Exame : exame
+
+Atestado <|-- AtestadoComparecimento
+Atestado <|-- AtestadoAfastamento
+
+Consulta "1" *-- "0..*" Atestado : atestados
+
+@enduml

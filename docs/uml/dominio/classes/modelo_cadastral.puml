@@ -1,0 +1,73 @@
+@startuml
+
+class Estado {
+  codigo : int
+  nome : String
+  sigla : String
+}
+
+class Cidade {
+  codigo : int
+  nome : String
+}
+
+class Endereco {
+  logradouro : String
+  numero : String
+  complemento : String
+  bairro : String
+  cep : String
+}
+
+class TipoDocumento {
+  codigo : int
+  nome : String
+}
+
+class Documento {
+  numero : String
+}
+
+class Pessoa {
+  codigo : int
+  nome : String
+  dataNascimento : Date
+  estadoCivil : EstadoCivil
+  escolaridade : String
+  statusCadastro : StatusCadastro
+  tipoPrioridade : TipoPrioridade
+}
+
+abstract class Papel {
+}
+
+class Paciente {
+  profissao : String
+}
+
+class Funcionario {
+  cargo : String
+  dataAdmissao : Date
+  dataDesligamento : Date
+}
+
+class Medico {
+  crm : String
+  especialidade : String
+}
+
+Pessoa "1" -- "0..*" Papel : papeis
+
+Papel <|-- Paciente
+Papel <|-- Funcionario
+Funcionario <|-- Medico
+
+Pessoa "1" *-- "0..1" Endereco : endereco
+Endereco "*" -- "1" Cidade : cidade
+
+Pessoa "1" *-- "0..*" Documento : documentos
+Documento "*" -- "1" TipoDocumento : tipoDocumento
+
+Estado "1" *-- "1..*" Cidade : cidades
+
+@enduml
