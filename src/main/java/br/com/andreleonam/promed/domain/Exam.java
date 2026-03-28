@@ -1,4 +1,4 @@
-package com.tripod.promed.domain;
+package br.com.andreleonam.promed.domain;
 
 import java.io.Serializable;
 

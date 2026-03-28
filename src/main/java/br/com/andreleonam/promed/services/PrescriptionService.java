@@ -1,12 +1,12 @@
-package com.tripod.promed.services;
+package br.com.andreleonam.promed.services;
 
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tripod.promed.domain.Prescription;
-import com.tripod.promed.repositories.PrescriptionRepository;
+import br.com.andreleonam.promed.domain.Prescription;
+import br.com.andreleonam.promed.repositories.PrescriptionRepository;
 
 @Service
 public class PrescriptionService {

@@ -1,4 +1,4 @@
-package com.tripod.promed.resources;
+package br.com.andreleonam.promed.resources;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tripod.promed.domain.Medicine;
-import com.tripod.promed.services.MedicineService;
+import br.com.andreleonam.promed.domain.Medicine;
+import br.com.andreleonam.promed.services.MedicineService;
 
 @RestController
 @RequestMapping(value="/medicines")

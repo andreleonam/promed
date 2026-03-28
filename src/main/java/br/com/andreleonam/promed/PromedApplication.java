@@ -1,4 +1,4 @@
-package com.tripod.promed;
+package br.com.andreleonam.promed;
 
 import java.util.Arrays;
 
@@ -7,10 +7,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.tripod.promed.domain.Exam;
-import com.tripod.promed.domain.Medicine;
-import com.tripod.promed.repositories.ExamRepository;
-import com.tripod.promed.repositories.MedicineRepository;
+import br.com.andreleonam.promed.domain.Exam;
+import br.com.andreleonam.promed.domain.Medicine;
+import br.com.andreleonam.promed.repositories.ExamRepository;
+import br.com.andreleonam.promed.repositories.MedicineRepository;
 
 @SpringBootApplication
 public class PromedApplication implements CommandLineRunner {

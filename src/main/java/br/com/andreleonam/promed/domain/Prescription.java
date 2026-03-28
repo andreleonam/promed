@@ -1,4 +1,4 @@
-package com.tripod.promed.domain;
+package br.com.andreleonam.promed.domain;
 
 import java.io.Serializable;
 
@@ -8,21 +8,23 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Medicine implements Serializable {
+public class Prescription implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	private String name;
+	private String dosage;
+	private String note;
 	
-	public Medicine() {
+	public Prescription () {
 	}
 
-	public Medicine(Integer id, String name) {
+	public Prescription(Integer id, String dosage, String note) {
 		super();
 		this.id = id;
-		this.name = name;
+		this.dosage = dosage;
+		this.note = note;
 	}
 
 	public Integer getId() {
@@ -33,12 +35,20 @@ public class Medicine implements Serializable {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getDosage() {
+		return dosage;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setDosage(String dosage) {
+		this.dosage = dosage;
+	}
+
+	public String getNote() {
+		return note;
+	}
+
+	public void setNote(String note) {
+		this.note = note;
 	}
 
 	@Override
@@ -57,7 +67,7 @@ public class Medicine implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Medicine other = (Medicine) obj;
+		Prescription other = (Prescription) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -65,7 +75,6 @@ public class Medicine implements Serializable {
 			return false;
 		return true;
 	}
-	
 	
 	
 }

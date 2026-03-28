@@ -1,12 +1,12 @@
-package com.tripod.promed.services;
+package br.com.andreleonam.promed.services;
 
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tripod.promed.domain.Exam;
-import com.tripod.promed.repositories.ExamRepository;
+import br.com.andreleonam.promed.domain.Exam;
+import br.com.andreleonam.promed.repositories.ExamRepository;
 
 @Service
 public class ExamService {
