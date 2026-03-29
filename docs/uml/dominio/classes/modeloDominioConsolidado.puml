@@ -44,6 +44,13 @@ class Pessoa {
   escolaridade : String
   statusCadastro : StatusCadastro
   tipoPrioridade : TipoPrioridade
+  email : String  
+}
+
+class Telefone {
+  ddd : String
+  numero : String
+  tipo : TipoTelefone
 }
 
 ' ================= PAPÉIS =================
@@ -243,5 +250,7 @@ Atestado <|-- AtestadoComparecimento
 Atestado <|-- AtestadoAfastamento
 
 Consulta "1" *-- "0..*" Atestado : atestados
+
+Pessoa "1" *-- "0..*" Telefone : telefones
 
 @enduml

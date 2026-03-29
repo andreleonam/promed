@@ -55,4 +55,10 @@ enum StatusPendencia {
   REJEITADO
 }
 
+enum TipoTelefone {
+  FIXO
+  CELULAR
+  COMERCIAL
+}
+
 @enduml

@@ -36,6 +36,7 @@ class Pessoa {
   escolaridade : String
   statusCadastro : StatusCadastro
   tipoPrioridade : TipoPrioridade
+  email: String
 }
 
 abstract class Papel {
@@ -69,5 +70,7 @@ Pessoa "1" *-- "0..*" Documento : documentos
 Documento "*" -- "1" TipoDocumento : tipoDocumento
 
 Estado "1" *-- "1..*" Cidade : cidades
+
+Pessoa "1" *-- "0..*" Telefone : telefones
 
 @enduml
