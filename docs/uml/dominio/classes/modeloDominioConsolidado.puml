@@ -45,6 +45,7 @@ class Pessoa {
   cpf : String
   rg : String
   orgaoExpedidor : String 
+  sexo: Sexo
 }
 
 class Telefone {

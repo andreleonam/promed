@@ -79,4 +79,11 @@ enum TipoDocumento {
   OUTROS
 }
 
+
+enum Sexo {
+  MASCULINO,
+  FEMININO,
+  OUTRO
+}
+
 @enduml

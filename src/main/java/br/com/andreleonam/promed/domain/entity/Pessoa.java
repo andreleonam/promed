@@ -5,6 +5,7 @@ import java.util.List;
 
 import br.com.andreleonam.promed.domain.enums.Escolaridade;
 import br.com.andreleonam.promed.domain.enums.EstadoCivil;
+import br.com.andreleonam.promed.domain.enums.Sexo;
 import br.com.andreleonam.promed.domain.enums.StatusCadastro;
 import br.com.andreleonam.promed.domain.enums.TipoPrioridade;
 import jakarta.persistence.CascadeType;
@@ -55,6 +56,10 @@ public class Pessoa {
 
     @Column(length = 150)
     private String email;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(length = 20)
+    private Sexo sexo;
 
     // ================= DOCUMENTOS DIRETOS =================
 
@@ -219,9 +224,19 @@ public class Pessoa {
         this.papeis = papeis;
     }
 
+    public Sexo getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(Sexo sexo) {
+		this.sexo = sexo;
+	}
+
+    
     // ================= EQUALS / HASHCODE =================
 
-    @Override
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Pessoa)) return false;
