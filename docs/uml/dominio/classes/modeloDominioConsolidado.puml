@@ -5,17 +5,16 @@ title Modelo de Domínio - Visão Consolidada
 ' Este diagrama representa uma visão consolidada do domínio
 ' Integra os principais contextos do sistema
 
-
 ' ================= ENTIDADES BÁSICAS =================
 
 class Estado {
-  codigo : int
+  id : int
   nome : String
   sigla : String
 }
 
 class Cidade {
-  codigo : int
+  id : int
   nome : String
 }
 
@@ -27,24 +26,25 @@ class Endereco {
   cep : String
 }
 
-class TipoDocumento {
-  codigo : int
-  nome : String
-}
-
 class Documento {
+  id : int
   numero : String
+  tipoDocumento : TipoDocumento
+  observacao : String
 }
 
 class Pessoa {
-  codigo : int
+  id : int
   nome : String
   dataNascimento : Date
   estadoCivil : EstadoCivil
-  escolaridade : String
+  escolaridade : Escolaridade
   statusCadastro : StatusCadastro
   tipoPrioridade : TipoPrioridade
-  email : String  
+  email : String
+  cpf : String
+  rg : String
+  orgaoExpedidor : String 
 }
 
 class Telefone {
@@ -56,6 +56,7 @@ class Telefone {
 ' ================= PAPÉIS =================
 
 abstract class Papel {
+  id : int
 }
 
 class Paciente {
@@ -70,13 +71,22 @@ class Funcionario {
 
 class Medico {
   crm : String
-  especialidade : String
+}
+
+class Especialidade {
+  nome : String
+}
+
+class MedicoEspecialidade {
+  dataObtencao : Date
+  titulo : String
+  certificacao : String
 }
 
 ' ================= CONSULTA =================
 
 class Consulta {
-  codigo : int
+  id : int
   dataHora : DateTime
   status : StatusConsulta
   tipo : TipoConsulta
@@ -119,7 +129,7 @@ class ExameApresentado {
 ' ================= PRESCRIÇÃO =================
 
 abstract class Prescricao {
-  codigo : int
+  id : int
   dataPrescricao : DateTime
   observacoes : Text
 }
@@ -145,7 +155,7 @@ class ItemPrescricaoManipulado {
 }
 
 class Medicamento {
-  codigo : int
+  id : int
   nome : String
 }
 
@@ -155,7 +165,7 @@ class ComponenteFormula {
 }
 
 class Substancia {
-  codigo : int
+  id : int
   nome : String
 }
 
@@ -170,7 +180,7 @@ class EncaminhamentoConsulta {
 ' ================= EXAMES =================
 
 class SolicitacaoExame {
-  codigo : int
+  id : int
   motivo : Text
   observacoes : Text
   status : StatusExame
@@ -182,14 +192,14 @@ class ItemSolicitacaoExame {
 }
 
 class Exame {
-  codigo : int
+  id : int
   nome : String
 }
 
 ' ================= ATESTADOS =================
 
 abstract class Atestado {
-  codigo : int
+  id : int
   dataEmissao : DateTime
   observacoes : Text
 }
@@ -216,7 +226,6 @@ Pessoa "1" *-- "0..1" Endereco : endereco
 Endereco "*" -- "1" Cidade : cidade
 
 Pessoa "1" *-- "0..*" Documento : documentos
-Documento "*" -- "1" TipoDocumento : tipoDocumento
 
 Estado "1" *-- "1..*" Cidade : cidades
 
@@ -252,5 +261,8 @@ Atestado <|-- AtestadoAfastamento
 Consulta "1" *-- "0..*" Atestado : atestados
 
 Pessoa "1" *-- "0..*" Telefone : telefones
+
+Medico "1" -- "0..*" MedicoEspecialidade
+Especialidade "1" -- "0..*" MedicoEspecialidade
 
 @enduml

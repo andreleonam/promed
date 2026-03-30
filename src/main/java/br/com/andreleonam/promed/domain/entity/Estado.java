@@ -4,6 +4,9 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -12,35 +15,34 @@ import jakarta.persistence.Table;
 @Table(name = "estado")
 public class Estado {
 
-    @Id
-    @Column(name = "codigo")
-    private Integer codigo;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
-    @Column(name = "nome")
-    private String nome;
+	@Column(nullable = false, length = 100)
+	private String nome;
 
-    @Column(name = "sigla")
-    private String sigla;
+	@Column(nullable = false, length = 2, unique = true)
+	private String sigla;
 
-    @OneToMany(mappedBy = "estado")
-    private List<Cidade> cidades;
+	@OneToMany(mappedBy = "estado", fetch = FetchType.LAZY)
+	private List<Cidade> cidades;
 
 	public Estado() {
 	}
 
-	public Estado(Integer codigo, String nome, String sigla, List<Cidade> cidades) {
-		this.codigo = codigo;
+	public Estado(Integer id, String nome, String sigla) {
+		this.id = id;
 		this.nome = nome;
 		this.sigla = sigla;
-		this.cidades = cidades;
 	}
 
-	public Integer getCodigo() {
-		return codigo;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setCodigo(Integer codigo) {
-		this.codigo = codigo;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getNome() {
@@ -69,16 +71,16 @@ public class Estado {
 
 	@Override
 	public boolean equals(Object o) {
-	    if (this == o) return true;
-	    if (!(o instanceof Estado)) return false;
-	    Estado that = (Estado) o;
-	    return codigo != null && codigo.equals(that.codigo);
+		if (this == o)
+			return true;
+		if (!(o instanceof Estado))
+			return false;
+		Estado that = (Estado) o;
+		return id != null && id.equals(that.id);
 	}
 
 	@Override
 	public int hashCode() {
-	    return getClass().hashCode();
+		return getClass().hashCode();
 	}
-    
-    
 }
